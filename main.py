@@ -7,26 +7,24 @@ first_name = sys.argv[2]
 last_name = sys.argv[3]
 password = sys.argv[4]
 
-browser = webdriver.Firefox()
-
 #Sites
 websites = {
     "BigW": "https://www.bigw.com.au/product/playstation-5-console/p/124625/",
     "Amazon": "https://www.amazon.com.au/PlayStation-5-Console/dp/B08HHV8945/ref=sr_1_1?crid=IIP48EJJKL34&dchild=1&keywords=playstation+5&qid=1623918489&s=videogames&sprefix=play%2Caps%2C355&sr=1-1",}
 
-browser.get(websites["Amazon"])
 
 buy_button = False
 ps5_acquired = False
 
 def amazon_buy():
     try:
+        browser.get(websites["Amazon"])
         try:
             buy_now_button = browser.find_element_by_id("buy-now-button")
             buy_now_button.click()
         except:
             time.sleep(3)
-            browser.refresh()
+            browser.close()
 
         email_input = browser.find_element_by_id("ap_email")
         email_input.click()
@@ -49,9 +47,9 @@ def amazon_buy():
         ps5_acquired = True
         browser.close()
     except:
-        amazon_buy()
-    
+        pass
 
-
-
-amazon_buy()
+while not ps5_acquired:
+    browser = webdriver.Firefox()
+    amazon_buy()
+    print("scanning")
