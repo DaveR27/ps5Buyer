@@ -42,7 +42,6 @@ def amazon_buy():
 
         place_your_order_button = browser.find_element_by_name("placeYourOrder1")
         place_your_order_button.click()
-        print(place_your_order_button)
         time.sleep(1)
         ps5_acquired = True
         browser.close()
