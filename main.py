@@ -48,6 +48,9 @@ def amazon_buy():
     except:
         pass
 
+
+def bigw_buy():
+    
 while not ps5_acquired:
     browser = webdriver.Firefox()
     amazon_buy()
