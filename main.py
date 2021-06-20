@@ -53,7 +53,7 @@ def amazon_buy(acquired):
         place_your_order_button.click()
         return True
     except:
-        time.sleep(1)
+        time.sleep(2)
         browser.close()
         return False
 
@@ -107,7 +107,7 @@ def bigw_buy(acquired):
         procced_to_payment = browser.find_element_by_xpath('/html/body/div[2]/div/div[2]/div[3]/section/section/form/div/div/button')
         procced_to_payment.click()
 
-        time.sleep(4)
+        time.sleep(5)
 
         credit_card = browser.find_element_by_xpath('/html/body/div[2]/div/div[2]/div[3]/section/section/section[2]/div[2]/section/div[2]/header/section/input')
         credit_card.click()
@@ -122,7 +122,7 @@ def bigw_buy(acquired):
         buy_button.click()
         return True
     except:
-        time.sleep(1)
+        time.sleep(2)
         browser.close()
         return False
 
@@ -139,9 +139,11 @@ def sony_buy(acquired):
         return False
 
 while not ps5_acquired:
-    print("###scanning### AMAZON -- ps5_aquired: " + str(ps5_acquired))
+    print("###scanning### AMAZON")
     ps5_acquired = amazon_buy(ps5_acquired)
-    print("###scanning### BIGW -- ps5_aquired: " + str(ps5_acquired))
+    print("ps5_aquired: " + str(ps5_acquired))
+    print("###scanning### BIGW")
     ps5_acquired = bigw_buy(ps5_acquired)
+    print("ps5_aquired: " + str(ps5_acquired))
     # print("###scanning### SONY -- ps5_aquired: " + str(ps5_acquired))
     # ps5_acquired = bigw_buy(ps5_acquired)
