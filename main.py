@@ -6,12 +6,11 @@ email = sys.argv[1]
 first_name = sys.argv[2]
 last_name = sys.argv[3]
 password = sys.argv[4]
+csv = sys.argv[5]
 
-# https://www.bigw.com.au/product/playstation-5-console/p/124625/
-#
 #Sites
 websites = {
-    "BigW": "https://www.bigw.com.au/product/ps5-pulse-3d-gaming-headset/p/124629/",
+    "BigW": "https://www.bigw.com.au/product/playstation-5-console/p/124625/",
     "Amazon": "https://www.amazon.com.au/PlayStation-5-Console/dp/B08HHV8945/ref=sr_1_1?crid=IIP48EJJKL34&dchild=1&keywords=playstation+5&qid=1623918489&s=videogames&sprefix=play%2Caps%2C355&sr=1-1",
     "Sony": ""}
 
@@ -56,18 +55,68 @@ def bigw_buy(acquired):
     try:
         browser.get(websites["BigW"])
 
-        add_to_cart = browser.find_element_by_xpath("/html/body/div[2]/div/div[2]/main/div/div[1]/div[2]/div[8]/div[1]/button[1]")
+        add_to_cart = browser.find_element_by_xpath('/html/body/div[2]/div/div[2]/main/div/div[1]/div[2]/div[8]/div[1]/button[1]')
         add_to_cart.click()
 
-        postcode = browser.find_element_by_xpath("html.aem-AuthorLayer-Edit.noscroll body.page.basicpage.ReactModal__Body--open div.ReactModalPortal div.ReactModal__Overlay.ReactModal__Overlay--after-open.ModalOverlay div.ReactModal__Content.ReactModal__Content--after-open.Modal.size-small.SetUserLocationModal div.modal-content div.SetUserLocationModalContent div.input-container div.SuburbInput.css-2b097c-container div.SuburbInputPrefix__control.css-yk16xz-control div.SuburbInputPrefix__value-container.css-1hwfws3 div.css-1g6gooi div.SuburbInputPrefix__input input#react-select-3-input")
+        time.sleep(1)
+        postcode = browser.find_element_by_xpath('/html/body/div[10]/div/div/div/div/div/div/div')
         postcode.click()
-        postcode.send_keys(4212)
-        postcode.send_keys("\n")
+        time.sleep(1)
+
+        postcode_enter = browser.find_element_by_id('react-select-2-input')
+        postcode_enter.send_keys('4212')
+        time.sleep(1)
+        postcode_enter.send_keys(webdriver.common.keys.Keys.ENTER)
+
+        time.sleep(1)
+        save_button = browser.find_element_by_xpath('/html/body/div[10]/div/div/div/div/div[3]/button')
+        save_button.click()
+
+        add_to_cart2 = browser.find_element_by_xpath('/html/body/div[2]/div/div[2]/main/div/div[1]/div[2]/div[8]/div/div[1]/div[3]/button[1]')
+        add_to_cart2.click()
+
+        checkout = browser.find_element_by_xpath('/html/body/div[2]/div/div[2]/header/div[2]/div[2]/button[2]')
+        checkout.click()
+
+        procced_to_checkout = browser.find_element_by_xpath('/html/body/div[2]/div/div[2]/main/div[2]/div/div[2]/section/div[5]/button')
+        procced_to_checkout.click()
+
+        time.sleep(1)
+
+        email_input = browser.find_element_by_id('login__email')
+        email_input.click()
+        email_input.send_keys(email)
+
+        password_input = browser.find_element_by_id('login__password')
+        password_input.click()
+        password_input.send_keys(password)
+
+        login_button = browser.find_element_by_xpath('/html/body/div[2]/div/div[2]/main/div/div[1]/form/div[3]/button')
+        login_button.click()
+
+        time.sleep(1)
+        procced_to_payment = browser.find_element_by_xpath('/html/body/div[2]/div/div[2]/div[3]/section/section/form/div/div/button')
+        procced_to_payment.click()
+
+        time.sleep(3)
+
+        credit_card = browser.find_element_by_xpath('/html/body/div[2]/div/div[2]/div[3]/section/section/section[2]/div[2]/section/div[2]/header/section/input')
+        credit_card.click()
+
+        csv_input = browser.find_element_by_xpath('//*[@id="saved-cards__cv2"]')
+        csv_input.click()
+        csv_input.send_keys(csv)
+        
+        time.sleep(1)
+
+        buy_button = browser.find_element_by_xpath('/html/body/div[2]/div/div[2]/div[3]/section/section/section[2]/div[2]/section/div[2]/section/div/form/div[3]/button')
+        buy_button.click()
+
         return True
     except:
         time.sleep(1)
-        #browser.close()
-        return True
+        browser.close()
+        return False
 
 def sony_buy(acquired):
     browser = webdriver.Firefox()
@@ -82,9 +131,9 @@ def sony_buy(acquired):
         return False
 
 while not ps5_acquired:
-    print("###scanning### AMAZON -- ps5_aquired: " + str(ps5_acquired))
-    ps5_acquired = amazon_buy(ps5_acquired)
-    #print("###scanning### BIGW -- ps5_aquired: " + str(ps5_acquired))
-    #ps5_acquired = bigw_buy(ps5_acquired)
+    # print("###scanning### AMAZON -- ps5_aquired: " + str(ps5_acquired))
+    # ps5_acquired = amazon_buy(ps5_acquired)
+    print("###scanning### BIGW -- ps5_aquired: " + str(ps5_acquired))
+    ps5_acquired = bigw_buy(ps5_acquired)
     # print("###scanning### SONY -- ps5_aquired: " + str(ps5_acquired))
     # ps5_acquired = bigw_buy(ps5_acquired)
