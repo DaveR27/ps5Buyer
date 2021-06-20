@@ -12,16 +12,25 @@ csv = sys.argv[5]
 websites = {
     "BigW": "https://www.bigw.com.au/product/playstation-5-console/p/124625/",
     "Amazon": "https://www.amazon.com.au/PlayStation-5-Console/dp/B08HHV8945/ref=sr_1_1?crid=IIP48EJJKL34&dchild=1&keywords=playstation+5&qid=1623918489&s=videogames&sprefix=play%2Caps%2C355&sr=1-1",
-    "Sony": ""}
+    "Sony": ""
+}
 
+testWebsites = {
+    "BigW": "https://www.bigw.com.au/product/playstation-4-500gb-slim-console-jet-black/p/531009/",
+    "Amazon": "https://www.amazon.com.au/PlayStation-4-500GB-Console-Black/dp/B0773RV962/ref=sr_1_1?crid=10U5ENL6A4AMJ&dchild=1&keywords=playstation+4&qid=1624163824&sprefix=playstation+4%2Caps%2C318&sr=8-1",
+    "Sony": ""
+}
 
+mode = websites
 buy_button = False
 ps5_acquired = False
 
 def amazon_buy(acquired):
     browser = webdriver.Firefox()
     try:
-        browser.get(websites["Amazon"])
+        browser.get(mode["Amazon"])
+
+        time.sleep(2)
         buy_now_button = browser.find_element_by_id("buy-now-button")
         buy_now_button.click()
 
@@ -39,10 +48,9 @@ def amazon_buy(acquired):
         password_continue = browser.find_element_by_id("signInSubmit")
         password_continue.click()
 
-        place_your_order_button = browser.find_element_by_name("placeYourOrder1")
+        time.sleep(3)
+        place_your_order_button = browser.find_element_by_xpath('/html/body/div[5]/div/div[2]/div[2]/div/div[2]/div[1]/form/div[2]/div/div/div/span/span/input')
         place_your_order_button.click()
-        time.sleep(10)
-        browser.close()
         return True
     except:
         time.sleep(1)
@@ -53,7 +61,7 @@ def amazon_buy(acquired):
 def bigw_buy(acquired):
     browser = webdriver.Firefox()
     try:
-        browser.get(websites["BigW"])
+        browser.get(mode["BigW"])
 
         add_to_cart = browser.find_element_by_xpath('/html/body/div[2]/div/div[2]/main/div/div[1]/div[2]/div[8]/div[1]/button[1]')
         add_to_cart.click()
@@ -62,7 +70,6 @@ def bigw_buy(acquired):
         postcode = browser.find_element_by_xpath('/html/body/div[10]/div/div/div/div/div/div/div')
         postcode.click()
         time.sleep(1)
-
         postcode_enter = browser.find_element_by_id('react-select-2-input')
         postcode_enter.send_keys('4212')
         time.sleep(1)
@@ -71,18 +78,20 @@ def bigw_buy(acquired):
         time.sleep(1)
         save_button = browser.find_element_by_xpath('/html/body/div[10]/div/div/div/div/div[3]/button')
         save_button.click()
-
+        
+        time.sleep(1)
         add_to_cart2 = browser.find_element_by_xpath('/html/body/div[2]/div/div[2]/main/div/div[1]/div[2]/div[8]/div/div[1]/div[3]/button[1]')
         add_to_cart2.click()
 
         checkout = browser.find_element_by_xpath('/html/body/div[2]/div/div[2]/header/div[2]/div[2]/button[2]')
         checkout.click()
 
+        time.sleep(1)
+
         procced_to_checkout = browser.find_element_by_xpath('/html/body/div[2]/div/div[2]/main/div[2]/div/div[2]/section/div[5]/button')
         procced_to_checkout.click()
 
         time.sleep(1)
-
         email_input = browser.find_element_by_id('login__email')
         email_input.click()
         email_input.send_keys(email)
@@ -94,11 +103,11 @@ def bigw_buy(acquired):
         login_button = browser.find_element_by_xpath('/html/body/div[2]/div/div[2]/main/div/div[1]/form/div[3]/button')
         login_button.click()
 
-        time.sleep(1)
+        time.sleep(2)
         procced_to_payment = browser.find_element_by_xpath('/html/body/div[2]/div/div[2]/div[3]/section/section/form/div/div/button')
         procced_to_payment.click()
 
-        time.sleep(3)
+        time.sleep(4)
 
         credit_card = browser.find_element_by_xpath('/html/body/div[2]/div/div[2]/div[3]/section/section/section[2]/div[2]/section/div[2]/header/section/input')
         credit_card.click()
@@ -107,11 +116,10 @@ def bigw_buy(acquired):
         csv_input.click()
         csv_input.send_keys(csv)
         
-        time.sleep(1)
+        time.sleep(2)
 
         buy_button = browser.find_element_by_xpath('/html/body/div[2]/div/div[2]/div[3]/section/section/section[2]/div[2]/section/div[2]/section/div/form/div[3]/button')
         buy_button.click()
-
         return True
     except:
         time.sleep(1)
@@ -131,8 +139,8 @@ def sony_buy(acquired):
         return False
 
 while not ps5_acquired:
-    # print("###scanning### AMAZON -- ps5_aquired: " + str(ps5_acquired))
-    # ps5_acquired = amazon_buy(ps5_acquired)
+    print("###scanning### AMAZON -- ps5_aquired: " + str(ps5_acquired))
+    ps5_acquired = amazon_buy(ps5_acquired)
     print("###scanning### BIGW -- ps5_aquired: " + str(ps5_acquired))
     ps5_acquired = bigw_buy(ps5_acquired)
     # print("###scanning### SONY -- ps5_aquired: " + str(ps5_acquired))
