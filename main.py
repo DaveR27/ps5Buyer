@@ -1,5 +1,6 @@
 import time
 import sys
+import os
 from selenium import webdriver
 
 email = sys.argv[1]
@@ -139,11 +140,8 @@ def sony_buy(acquired):
         return False
 
 while not ps5_acquired:
-    print("###scanning### AMAZON")
     ps5_acquired = amazon_buy(ps5_acquired)
-    print("ps5_aquired: " + str(ps5_acquired))
-    print("###scanning### BIGW")
     ps5_acquired = bigw_buy(ps5_acquired)
-    print("ps5_aquired: " + str(ps5_acquired))
     # print("###scanning### SONY -- ps5_aquired: " + str(ps5_acquired))
     # ps5_acquired = bigw_buy(ps5_acquired)
+    os.system("rm geckodriver.log")
