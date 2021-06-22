@@ -145,3 +145,4 @@ while not ps5_acquired:
     # print("###scanning### SONY -- ps5_aquired: " + str(ps5_acquired))
     # ps5_acquired = bigw_buy(ps5_acquired)
     os.system("rm geckodriver.log")
+    os.system("rm -rf /tmp")

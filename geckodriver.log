@@ -1,31 +1,7 @@
-1624273787910	geckodriver	INFO	Listening on 127.0.0.1:36247
-1624273788913	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileEJGmLZ"
-
-(firefox:495374): Gtk-WARNING **: 21:09:48.953: Theme parsing error: gtk-dark.css:6342:10: 'height' is not a valid property name
-1624273789272	Marionette	INFO	Marionette enabled
-
-(firefox:495374): Gtk-WARNING **: 21:09:49.531: Theme parsing error: gtk.css:6342:10: 'height' is not a valid property name
-
-(/usr/lib/firefox/firefox:495476): Gtk-WARNING **: 21:09:49.561: Theme parsing error: gtk-dark.css:6342:10: 'height' is not a valid property name
-
-(firefox:495374): Gtk-WARNING **: 21:09:49.586: Theme parsing error: gtk.css:6342:10: 'height' is not a valid property name
-
-(firefox:495374): Gtk-WARNING **: 21:09:49.615: Theme parsing error: gtk-dark.css:6342:10: 'height' is not a valid property name
-
-(/usr/lib/firefox/firefox:495505): Gtk-WARNING **: 21:09:49.741: Theme parsing error: gtk-dark.css:6342:10: 'height' is not a valid property name
-console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileEJGmLZ/search.json.mozlz4", (void 0)))
-1624273790228	Marionette	INFO	Listening on port 42009
-1624273790327	Marionette	WARN	TLS certificate errors will be ignored for this session
-
-(/usr/lib/firefox/firefox:495594): Gtk-WARNING **: 21:09:50.579: Theme parsing error: gtk-dark.css:6342:10: 'height' is not a valid property name
-
-###!!! [Parent][MessageChannel] Error: (msgtype=0x5C0014,name=PHttpChannel::Msg_DeleteSelf) Channel error: cannot send/recv
-
-
-###!!! [Parent][MessageChannel] Error: (msgtype=0x390143,name=PContent::Msg_CommitBrowsingContextTransaction) Channel error: cannot send/recv
-
-A content process crashed and MOZ_CRASHREPORTER_SHUTDOWN is set, shutting down
-1624273794351	Marionette	INFO	Stopped listening on port 42009
-
-###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
-
+1624344585613	geckodriver	INFO	Listening on 127.0.0.1:49605
+1624344585617	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileWazZV5"
+1624344585852	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at /tmp/rust_mozprofileWazZV5/search.json.mozlz4", (void 0)))
+1624344586685	Marionette	INFO	Listening on port 38121
+1624344586726	Marionette	WARN	TLS certificate errors will be ignored for this session
+1624344588693	Marionette	INFO	Stopped listening on port 38121
