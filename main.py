@@ -3,11 +3,12 @@ import sys
 import os
 from selenium import webdriver
 
-email = sys.argv[1]
-first_name = sys.argv[2]
-last_name = sys.argv[3]
-password = sys.argv[4]
-csv = sys.argv[5]
+first_name = sys.argv[1]
+last_name = sys.argv[2]
+email = sys.argv[3]
+postcode_in = sys.argv[4]
+password = sys.argv[5]
+csv = sys.argv[6]
 
 #Sites
 websites = {
@@ -54,7 +55,9 @@ def amazon_buy(acquired):
 
         time.sleep(3)
         place_your_order_button = browser.find_element_by_xpath('/html/body/div[5]/div/div[2]/div[2]/div/div[2]/div[1]/form/div[2]/div/div/div/span/span/input')
-        place_your_order_button.click()
+        if mode == websites:
+            place_your_order_button.click()
+        print("We got it !!!!!!!!")
         return True
     except:
         time.sleep(2)
@@ -75,7 +78,7 @@ def bigw_buy(acquired):
         postcode.click()
         time.sleep(1)
         postcode_enter = browser.find_element_by_id('react-select-2-input')
-        postcode_enter.send_keys('4212')
+        postcode_enter.send_keys(postcode_in)
         time.sleep(1)
         postcode_enter.send_keys(webdriver.common.keys.Keys.ENTER)
 
@@ -123,7 +126,9 @@ def bigw_buy(acquired):
         time.sleep(2)
 
         buy_button = browser.find_element_by_xpath('/html/body/div[2]/div/div[2]/div[3]/section/section/section[2]/div[2]/section/div[2]/section/div/form/div[3]/button')
-        buy_button.click()
+        if mode == websites:
+            buy_button.click()
+        print("We got it !!!!!!!!")
         return True
     except:
         time.sleep(2)
@@ -146,9 +151,13 @@ while not ps5_acquired:
     print("###scanning### Amazon")
     ps5_acquired = amazon_buy(ps5_acquired)
     print("ps5_aquired: " + str(ps5_acquired))
+    if ps5_acquired:
+        break
     print("###scanning### BigW") 
     ps5_acquired = bigw_buy(ps5_acquired)
     print("ps5_aquired: " + str(ps5_acquired))
+    if ps5_acquired:
+        break
     # print("###scanning### SONY -- ps5_aquired: " + str(ps5_acquired))
     # ps5_acquired = bigw_buy(ps5_acquired)
     os.system("rm geckodriver.log")
