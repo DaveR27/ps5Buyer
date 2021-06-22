@@ -26,8 +26,11 @@ mode = websites
 buy_button = False
 ps5_acquired = False
 
+fireFoxOptions = webdriver.FirefoxOptions()
+fireFoxOptions.set_headless()
+
 def amazon_buy(acquired):
-    browser = webdriver.Firefox()
+    browser = webdriver.Firefox(options=fireFoxOptions)
     try:
         browser.get(mode["Amazon"])
 
@@ -60,7 +63,7 @@ def amazon_buy(acquired):
 
 
 def bigw_buy(acquired):
-    browser = webdriver.Firefox()
+    browser = webdriver.Firefox(options=fireFoxOptions)
     try:
         browser.get(mode["BigW"])
 
@@ -140,9 +143,13 @@ def sony_buy(acquired):
         return False
 
 while not ps5_acquired:
+    print("###scanning### Amazon")
     ps5_acquired = amazon_buy(ps5_acquired)
+    print("ps5_aquired: " + str(ps5_acquired))
+    print("###scanning### BigW") 
     ps5_acquired = bigw_buy(ps5_acquired)
+    print("ps5_aquired: " + str(ps5_acquired))
     # print("###scanning### SONY -- ps5_aquired: " + str(ps5_acquired))
     # ps5_acquired = bigw_buy(ps5_acquired)
     os.system("rm geckodriver.log")
-    os.system("rm -rf /tmp")
+    os.system("rm -rf /tmp/*")
