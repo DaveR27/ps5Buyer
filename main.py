@@ -13,7 +13,7 @@ csv = sys.argv[6]
 #Sites
 websites = {
     "BigW": "https://www.bigw.com.au/product/playstation-5-console/p/124625/",
-    "Amazon": "https://www.amazon.com.au/PlayStation-5-Console/dp/B08HHV8945/ref=sr_1_1?crid=IIP48EJJKL34&dchild=1&keywords=playstation+5&qid=1623918489&s=videogames&sprefix=play%2Caps%2C355&sr=1-1",
+    "Amazon": "https://www.amazon.com.au/dp/B08HHV8945/?coliid=I2O3YH0WII5APB&colid=5IDC6AO5GDIN&psc=0&ref_=lv_ov_lig_dp_it",
     "Sony": ""
 }
 
